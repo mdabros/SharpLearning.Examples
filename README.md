@@ -11,13 +11,13 @@ RegressionDecisionTreeModel can be seen below:
 
 ```c#
 [TestMethod]
-public void RegressionLearner_Learn_And_Predcit()
+public void RegressionLearner_Learn_And_Predict()
 {
     // Use StreamReader(filepath) when running from filesystem
     var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
     var targetName = "quality";
 
-    // read feature matrix
+    // read feature matrix (all columns except quality)
     var observations = parser.EnumerateRows(c => c != targetName)
         .ToF64Matrix();
 
@@ -43,13 +43,13 @@ the the individual learner types are used in exactly the same way. Same example 
 
 ```c#
 [TestMethod]
-public void RegressionLearner_Learn_And_Predcit()
+public void RegressionLearner_Learn_And_Predict()
 {
     // Use StreamReader(filepath) when running from filesystem
     var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
     var targetName = "quality";
 
-    // read feature matrix
+    // read feature matrix (all columns except quality)
     var observations = parser.EnumerateRows(c => c != targetName)
         .ToF64Matrix();
 
