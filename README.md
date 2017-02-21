@@ -73,15 +73,15 @@ Datasets
 SharpLearning.Examples contains 3 datasets in csv format for use with the examples:
 
 **MNIST_SMALL**
-- *mnist_small_train* - 1000 examples from the original MNIST training data set
-- *mnist_small_test* - 1000 examples from the original MNIST test data set
+- *mnist_small_train* - 1000 observations from the original MNIST training data set
+- *mnist_small_test* - 1000 observations from the original MNIST test data set
 
 The original and complete dataset can be found here:
 http://yann.lecun.com/exdb/mnist/
 
 **CIFAR10_SMALL**
-- *cifar10_train_small* - 1000 examples from the original CIFAR10 training data set
-- *cifar10_test_small* - 1000 examples from the original CIFAR10 test data set
+- *cifar10_train_small* - 1000 observations from the original CIFAR10 training data set
+- *cifar10_test_small* - 1000 observations from the original CIFAR10 test data set
 
 The original and complete dataset can be found here:
 https://www.cs.toronto.edu/~kriz/cifar.html
