@@ -1,10 +1,12 @@
 SharpLearning.Examples
 ======================
+[![Build status](https://ci.appveyor.com/api/projects/status/2i1vf6vbxdh3hx76?svg=true)](https://ci.appveyor.com/project/mdabros/sharplearning-examples)
 
 SharpLearning.Examples contains code examples to show how to use the machine learning library [SharpLearning](https://github.com/mdabros/SharpLearning)
 
 The examples are structured in a unittest project, where each test is a separate example. 
-There are no assertions and the unit test framework is only used as an easy way of executing the examples.
+There are no assertions and the unit test framework is only used as an easy way of running the examples.
+Information about how to get started can be found in the SharpLearning [wiki](https://github.com/mdabros/SharpLearning/wiki)
 
 An example showing how to read data, create a RegressionDecisionTreeLearner and learn a
 RegressionDecisionTreeModel can be seen below:
@@ -97,8 +99,4 @@ Installation
 
 Installation instructions for SharpLearning are availible in the main SharpLearning repository:
 [SharpLearning](https://github.com/mdabros/SharpLearning)
-
-Build Status
-------------
-Windows (.Net): [![Build status](https://ci.appveyor.com/api/projects/status/2i1vf6vbxdh3hx76?svg=true)](https://ci.appveyor.com/project/mdabros/sharplearning-examples)
 
