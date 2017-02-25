@@ -12,7 +12,7 @@ using SharpLearning.CrossValidation.CrossValidators;
 using SharpLearning.RandomForest.Learners;
 using SharpLearning.GradientBoost.Learners;
 
-namespace SharpLearning.Examples.Guide
+namespace SharpLearning.Examples.Guides
 {
     [TestClass]
     public class SharpLearningGuideExamples
