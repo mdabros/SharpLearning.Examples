@@ -112,6 +112,7 @@
     <Compile Include="CrossValidation\CrossValidationExamples.cs" />
     <Compile Include="CrossValidation\TrainTestSplitExamples.cs" />
     <Compile Include="FeatureTransformations\FeatureNormalizationExample.cs" />
+    <Compile Include="Guide\SharpLearningGuideExamples.cs" />
     <Compile Include="InputOutput\CsvParserExamples.cs" />
     <Compile Include="Learners\ClassificationLearnerExamples.cs" />
     <Compile Include="Learners\RegressionLearnerExamples.cs" />

@@ -36,7 +36,7 @@ namespace SharpLearning.Examples.Optimization
             // metric to minimize
             var metric = new MeanSquaredErrorRegressionMetric();
 
-            // parameters to try in grid search
+            // Parameter ranges for the optimizer 
             var paramers = new double[][]
             {
                 new double[] { 1, 100 }, // maximumTreeDepth (min: 1, max: 100)

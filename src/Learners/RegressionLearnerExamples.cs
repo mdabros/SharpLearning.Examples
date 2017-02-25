@@ -31,7 +31,6 @@ namespace SharpLearning.Examples.Learners
 
             // create learner
             var learner = new RegressionDecisionTreeLearner();
-            var lea = new RegressionRandomForestLearner(trees: 100);
 
             // learns a RegressionDecisionTreeModel
             var model = learner.Learn(observations, targets);
