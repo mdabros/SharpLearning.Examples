@@ -41,56 +41,56 @@
       <HintPath>..\packages\MathNet.Numerics.3.17.0\lib\net40\MathNet.Numerics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.AdaBoost">
-      <HintPath>..\packages\SharpLearning.AdaBoost.0.25.0.3\lib\net45\SharpLearning.AdaBoost.dll</HintPath>
+    <Reference Include="SharpLearning.AdaBoost, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.AdaBoost.0.25.0.4\lib\net45\SharpLearning.AdaBoost.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.Common.Interfaces">
-      <HintPath>..\packages\SharpLearning.Common.Interfaces.0.25.0.3\lib\net45\SharpLearning.Common.Interfaces.dll</HintPath>
+    <Reference Include="SharpLearning.Common.Interfaces, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Common.Interfaces.0.25.0.4\lib\net45\SharpLearning.Common.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.Containers">
-      <HintPath>..\packages\SharpLearning.Containers.0.25.0.3\lib\net45\SharpLearning.Containers.dll</HintPath>
+    <Reference Include="SharpLearning.Containers, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Containers.0.25.0.4\lib\net45\SharpLearning.Containers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.CrossValidation">
-      <HintPath>..\packages\SharpLearning.CrossValidation.0.25.0.3\lib\net45\SharpLearning.CrossValidation.dll</HintPath>
+    <Reference Include="SharpLearning.CrossValidation, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.CrossValidation.0.25.0.4\lib\net45\SharpLearning.CrossValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.DecisionTrees">
-      <HintPath>..\packages\SharpLearning.DecisionTrees.0.25.0.3\lib\net45\SharpLearning.DecisionTrees.dll</HintPath>
+    <Reference Include="SharpLearning.DecisionTrees, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.DecisionTrees.0.25.0.4\lib\net45\SharpLearning.DecisionTrees.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.Ensemble">
-      <HintPath>..\packages\SharpLearning.Ensemble.0.25.0.3\lib\net45\SharpLearning.Ensemble.dll</HintPath>
+    <Reference Include="SharpLearning.Ensemble, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Ensemble.0.25.0.4\lib\net45\SharpLearning.Ensemble.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.FeatureTransformations">
-      <HintPath>..\packages\SharpLearning.FeatureTransformations.0.25.0.3\lib\net45\SharpLearning.FeatureTransformations.dll</HintPath>
+    <Reference Include="SharpLearning.FeatureTransformations, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.FeatureTransformations.0.25.0.4\lib\net45\SharpLearning.FeatureTransformations.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.GradientBoost">
-      <HintPath>..\packages\SharpLearning.GradientBoost.0.25.0.3\lib\net45\SharpLearning.GradientBoost.dll</HintPath>
+    <Reference Include="SharpLearning.GradientBoost, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.GradientBoost.0.25.0.4\lib\net45\SharpLearning.GradientBoost.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.InputOutput">
-      <HintPath>..\packages\SharpLearning.InputOutput.0.25.0.3\lib\net45\SharpLearning.InputOutput.dll</HintPath>
+    <Reference Include="SharpLearning.InputOutput, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.InputOutput.0.25.0.4\lib\net45\SharpLearning.InputOutput.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.Metrics">
-      <HintPath>..\packages\SharpLearning.Metrics.0.25.0.3\lib\net45\SharpLearning.Metrics.dll</HintPath>
+    <Reference Include="SharpLearning.Metrics, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Metrics.0.25.0.4\lib\net45\SharpLearning.Metrics.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SharpLearning.Neural, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Neural.0.25.0.3\lib\net45\SharpLearning.Neural.dll</HintPath>
+      <HintPath>..\packages\SharpLearning.Neural.0.25.0.4\lib\net45\SharpLearning.Neural.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SharpLearning.Optimization, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Optimization.0.25.0.3\lib\net45\SharpLearning.Optimization.dll</HintPath>
+      <HintPath>..\packages\SharpLearning.Optimization.0.25.0.4\lib\net45\SharpLearning.Optimization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SharpLearning.RandomForest, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.RandomForest.0.25.0.3\lib\net45\SharpLearning.RandomForest.dll</HintPath>
+      <HintPath>..\packages\SharpLearning.RandomForest.0.25.0.4\lib\net45\SharpLearning.RandomForest.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -112,7 +112,7 @@
     <Compile Include="CrossValidation\CrossValidationExamples.cs" />
     <Compile Include="CrossValidation\TrainTestSplitExamples.cs" />
     <Compile Include="FeatureTransformations\FeatureNormalizationExample.cs" />
-    <Compile Include="Guide\SharpLearningGuideExamples.cs" />
+    <Compile Include="Guides\MachineLearningGuide.cs" />
     <Compile Include="InputOutput\CsvParserExamples.cs" />
     <Compile Include="Learners\ClassificationLearnerExamples.cs" />
     <Compile Include="Learners\RegressionLearnerExamples.cs" />
