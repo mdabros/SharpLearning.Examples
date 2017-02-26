@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpLearning.AdaBoost.Learners;
 using SharpLearning.CrossValidation.TrainingTestSplitters;
 using SharpLearning.DecisionTrees.Learners;
 using SharpLearning.Examples.Properties;
@@ -147,7 +146,6 @@ namespace SharpLearning.Examples.Guides
             };
 
             // create optimizer
-            //var optimizer = new ParticleSwarmOptimizer(parameters, maxIterations: 10, numberOfParticles: 3);
             var optimizer = new RandomSearchOptimizer(parameters, iterations: 30, runParallel: true);
 
             // find best hyperparameters
@@ -263,7 +261,7 @@ namespace SharpLearning.Examples.Guides
 
             // Parameter ranges for the optimizer
             // best parameter to tune on random forest is featuresPrSplit.
-            var paramers = new double[][]
+            var parameters = new double[][]
             {
                 new double[] { 100, 300 }, // trees (min: 30, max: 120)
                 new double[] { 1, numberOfFeatures }, // featuresPrSplit (min: 0.5, max: 0.9)
@@ -297,7 +295,7 @@ namespace SharpLearning.Examples.Guides
             };
 
             // create random search optimizer
-            var optimizer = new RandomSearchOptimizer(paramers, iterations: 30, runParallel: true);
+            var optimizer = new RandomSearchOptimizer(parameters, iterations: 30, runParallel: true);
 
             // find best hyperparameters
             var result = optimizer.OptimizeBest(minimize);
@@ -355,13 +353,13 @@ namespace SharpLearning.Examples.Guides
             // for evaluating how well the model performs.
             var metric = new MeanSquaredErrorRegressionMetric();
 
-            // 5. Use an optimizer for tuning hyperparameters
+            // 6. Usually better results can be achieved by tuning a gradient boost learner
 
             var numberOfFeatures = trainSet.Observations.ColumnCount;
 
             // Parameter ranges for the optimizer
             // best parameter to tune on random forest is featuresPrSplit.
-            var paramers = new double[][]
+            var parameters = new double[][]
             {
                 new double[] { 80, 100 }, // iterations (min: 20, max: 100)
                 new double[] { 0.02, 0.2 }, // learning rate (min: 0.02, max: 0.2)
@@ -397,7 +395,7 @@ namespace SharpLearning.Examples.Guides
             };
 
             // create random search optimizer
-            var optimizer = new RandomSearchOptimizer(paramers, iterations: 30, runParallel: true);
+            var optimizer = new RandomSearchOptimizer(parameters, iterations: 30, runParallel: true);
 
             // find best hyperparameters
             var result = optimizer.OptimizeBest(minimize);
