@@ -10,6 +10,8 @@ using SharpLearning.RandomForest.Learners;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace SharpLearning.Examples.Guides
 {
@@ -44,7 +46,7 @@ namespace SharpLearning.Examples.Guides
             // for evaluating how well the model performs.
             var metric = new MeanSquaredErrorRegressionMetric();
 
-            // 1. Start with something simple: default DecisionTreeLearner
+            // Start with something simple: default DecisionTreeLearner
             var learner = new RegressionDecisionTreeLearner();
             var model = learner.Learn(trainSet.Observations, trainSet.Targets);
 
@@ -105,7 +107,7 @@ namespace SharpLearning.Examples.Guides
             // for evaluating how well the model performs.
             var metric = new MeanSquaredErrorRegressionMetric();
 
-            // 3. Use an optimizer for tuning hyperparameters
+            // Use an optimizer for tuning hyperparameters
 
             // Parameter ranges for the optimizer 
             var parameters = new double[][]
@@ -197,7 +199,7 @@ namespace SharpLearning.Examples.Guides
             // for evaluating how well the model performs.
             var metric = new MeanSquaredErrorRegressionMetric();
 
-            // 4. More advanced learner RandomForest. Try defualt parameters first
+            // More advanced learner RandomForest. Try defualt parameters first
 
             // create learner with default parameters
             var learner = new RegressionRandomForestLearner();
@@ -216,6 +218,80 @@ namespace SharpLearning.Examples.Guides
             // With default parameters the random forest learner
             // already outperforms the optimized decision tree learner.
             TraceTrainingAndTestError(trainError, testError);
+        }
+
+        [TestMethod]
+        public void RandomForest_Default_Parameters_Variable_Importance()
+        {
+            #region read and split data
+            // Use StreamReader(filepath) when running from filesystem
+            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
+            var targetName = "quality";
+
+            // read feature matrix
+            var observations = parser.EnumerateRows(c => c != targetName)
+                .ToF64Matrix();
+
+            // read regression targets
+            var targets = parser.EnumerateRows(targetName)
+                .ToF64Vector();
+
+            // creates training test splitter, 
+            // Since this is a regression problem, we use the random training/test set splitter.
+            // 30 % of the data is used for the test set. 
+            var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
+
+            var trainingTestSplit = splitter.SplitSet(observations, targets);
+            var trainSet = trainingTestSplit.TrainingSet;
+            var testSet = trainingTestSplit.TestSet;
+            #endregion
+
+            // since this is a regression problem we are using square error as metric
+            // for evaluating how well the model performs.
+            var metric = new MeanSquaredErrorRegressionMetric();
+
+            // More advanced learner RandomForest. Try defualt parameters first
+
+            // create learner with default parameters
+            var learner = new RegressionRandomForestLearner();
+
+            // learn model with found parameters
+            var model = learner.Learn(trainSet.Observations, trainSet.Targets);
+
+            // predict the training and test set.
+            var trainPredictions = model.Predict(trainSet.Observations);
+            var testPredictions = model.Predict(testSet.Observations);
+
+            // measure the error on training and test set.
+            var trainError = metric.Error(trainSet.Targets, trainPredictions);
+            var testError = metric.Error(testSet.Targets, testPredictions);
+
+            // With default parameters the random forest learner
+            // already outperforms the optimized decision tree learner.
+            TraceTrainingAndTestError(trainError, testError);
+
+            // the variable importance requires the featureNameToIndex
+            // from the data set. This mapping describes the relation
+            // from column name to index in the feature matrix.
+            var featureNameToIndex = parser.EnumerateRows(c => c != targetName)
+                .First().ColumnNameToIndex;
+
+            // Get the variable importance from the model.
+            // Variable importance is a measure made by to model 
+            // of how important each feature is.
+            var importances = model.GetVariableImportance(featureNameToIndex);
+
+            // trace normalized importances as csv.
+            var importanceCsv = new StringBuilder();
+            importanceCsv.Append("FeatureName;Importance");
+            foreach (var feature in importances)
+            {
+                importanceCsv.AppendLine();
+                importanceCsv.Append(string.Format("{0};{1:0.00}", 
+                    feature.Key, feature.Value));
+            }
+
+            Trace.WriteLine(importanceCsv);
         }
 
         [TestMethod]
@@ -345,7 +421,7 @@ namespace SharpLearning.Examples.Guides
             // for evaluating how well the model performs.
             var metric = new MeanSquaredErrorRegressionMetric();
 
-            // 6. Usually better results can be achieved by tuning a gradient boost learner
+            // Usually better results can be achieved by tuning a gradient boost learner
 
             var numberOfFeatures = trainSet.Observations.ColumnCount;
 
@@ -353,7 +429,7 @@ namespace SharpLearning.Examples.Guides
             // best parameter to tune on random forest is featuresPrSplit.
             var parameters = new double[][]
             {
-                new double[] { 80, 100 }, // iterations (min: 20, max: 100)
+                new double[] { 80, 300 }, // iterations (min: 20, max: 100)
                 new double[] { 0.02, 0.2 }, // learning rate (min: 0.02, max: 0.2)
                 new double[] { 8, 15 }, // maximumTreeDepth (min: 8, max: 15)
                 new double[] { 0.5, 0.9 }, // subSampleRatio (min: 0.5, max: 0.9)
@@ -410,8 +486,34 @@ namespace SharpLearning.Examples.Guides
             var trainError = metric.Error(trainSet.Targets, trainPredictions);
             var testError = metric.Error(testSet.Targets, testPredictions);
 
-            // Optimizer finds a much better set of hyperparameters.
+            // Optimizer found hyperparameters.
+            Trace.WriteLine(string.Format("Found parameters, iterations:  {0}, learning rate {1:0.000}:  maximumTreeDepth: {2}, subSampleRatio {3:0.000}, featuresPrSplit: {4} ",
+                (int)best[0], best[1], (int)best[2], best[3], (int)best[4]));
+
             TraceTrainingAndTestError(trainError, testError);
+
+            // the variable importance requires the featureNameToIndex
+            // from the data set. This mapping describes the relation
+            // from column name to index in the feature matrix.
+            var featureNameToIndex = parser.EnumerateRows(c => c != targetName)
+                .First().ColumnNameToIndex;
+
+            // Get the variable importance from the model.
+            // Variable importance is a measure made by to model 
+            // of how important each feature is.
+            var importances = model.GetVariableImportance(featureNameToIndex);
+
+            // trace normalized importances as csv.
+            var importanceCsv = new StringBuilder();
+            importanceCsv.Append("FeatureName;Importance");
+            foreach (var feature in importances)
+            {
+                importanceCsv.AppendLine();
+                importanceCsv.Append(string.Format("{0};{1:0.00}",
+                    feature.Key, feature.Value));
+            }
+
+            Trace.WriteLine(importanceCsv);
         }
 
         static void TraceTrainingAndTestError(double trainError, double testError)
