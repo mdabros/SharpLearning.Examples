@@ -20,7 +20,7 @@ namespace SharpLearning.Examples.Guides
         public void ReadAndSplitDataIntoTrainingTest_DecisionTree()
         {
             // Use StreamReader(filepath) when running from filesystem
-            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
+            var parser = new CsvParser(() => new StringReader(Resources.winequality_white), separator: ';');
             var targetName = "quality";
 
             // read feature matrix
@@ -32,12 +32,9 @@ namespace SharpLearning.Examples.Guides
                 .ToF64Vector();
 
             // creates training test splitter, 
-            // For a regression problem one would usually apply a random training/test set splitter.
-            // However, since the quality target we are trying to predict does not contain floating point numbers
-            // we are going to split the dataset using a stratified training/test set splitter.
-            // this will make sure that we have an even distribution of the various quality grades in our training and test set.
+            // Since this is a regression problem, we use the random training/test set splitter.
             // 30 % of the data is used for the test set. 
-            var splitter = new StratifiedTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
+            var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
 
             var trainingTestSplit = splitter.SplitSet(observations, targets);
             var trainSet = trainingTestSplit.TrainingSet;
@@ -95,12 +92,9 @@ namespace SharpLearning.Examples.Guides
                 .ToF64Vector();
 
             // creates training test splitter, 
-            // For a regression problem one would usually apply a random training/test set splitter.
-            // However, since the quality target we are trying to predict does not contain floating point numbers
-            // we are going to split the dataset using a stratified training/test set splitter.
-            // this will make sure that we have an even distribution of the various quality grades in our training and test set.
+            // Since this is a regression problem, we use the random training/test set splitter.
             // 30 % of the data is used for the test set. 
-            var splitter = new StratifiedTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
+            var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
 
             var trainingTestSplit = splitter.SplitSet(observations, targets);
             var trainSet = trainingTestSplit.TrainingSet;
@@ -120,17 +114,17 @@ namespace SharpLearning.Examples.Guides
                 new double[] { 1, 16 }, // minimumSplitSize (min: 1, max: 16)
             };
 
+            // Further split the training data to have a validation set to measure
+            // how well the model generalizes to unseen data during the optimization.
+            var validationSplit = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
+                .SplitSet(trainSet.Observations, trainSet.Targets);
+
             // Define optimizer objective (function to minimize)
             Func<double[], OptimizerResult> minimize = p =>
             {
                 // create the candidate learner using the current optimization parameters.
                 var candidateLearner = new RegressionDecisionTreeLearner(maximumTreeDepth: (int)p[0], 
                     minimumSplitSize: (int)p[1]);
-
-                // Further split the training data to have a validation set to measure
-                // how well the model generalizes to unseen data during the optimization.
-                var validationSplit = new StratifiedTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
-                    .SplitSet(trainSet.Observations, trainSet.Targets);
 
                 var candidateModel = candidateLearner.Learn(validationSplit.TrainingSet.Observations,
                     validationSplit.TrainingSet.Targets);
@@ -150,11 +144,11 @@ namespace SharpLearning.Examples.Guides
 
             // find best hyperparameters
             var result = optimizer.OptimizeBest(minimize);
-            var bestParameters = result.ParameterSet;
+            var best = result.ParameterSet;
 
             // create learner with found parameters
-            var learner = new RegressionDecisionTreeLearner(maximumTreeDepth: (int)bestParameters[0], 
-                minimumSplitSize: (int)bestParameters[1]);
+            var learner = new RegressionDecisionTreeLearner(maximumTreeDepth: (int)best[0], 
+                minimumSplitSize: (int)best[1]);
 
             // learn model with found parameters
             var model = learner.Learn(trainSet.Observations, trainSet.Targets);
@@ -167,7 +161,9 @@ namespace SharpLearning.Examples.Guides
             var trainError = metric.Error(trainSet.Targets, trainPredictions);
             var testError = metric.Error(testSet.Targets, testPredictions);
 
-            // Optimizer finds a much better set of hyperparameters.
+            // Optimizer found hyperparameters.
+            Trace.WriteLine(string.Format("Found parameters, maximumTreeDepth:  {0}, minimumSplitSize: {1}", 
+                (int)best[0], (int)best[1]));
             TraceTrainingAndTestError(trainError, testError);
         }
 
@@ -188,12 +184,9 @@ namespace SharpLearning.Examples.Guides
                 .ToF64Vector();
 
             // creates training test splitter, 
-            // For a regression problem one would usually apply a random training/test set splitter.
-            // However, since the quality target we are trying to predict does not contain floating point numbers
-            // we are going to split the dataset using a stratified training/test set splitter.
-            // this will make sure that we have an even distribution of the various quality grades in our training and test set.
+            // Since this is a regression problem, we use the random training/test set splitter.
             // 30 % of the data is used for the test set. 
-            var splitter = new StratifiedTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
+            var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
 
             var trainingTestSplit = splitter.SplitSet(observations, targets);
             var trainSet = trainingTestSplit.TrainingSet;
@@ -206,7 +199,7 @@ namespace SharpLearning.Examples.Guides
 
             // 4. More advanced learner RandomForest. Try defualt parameters first
 
-            // create learner with found parameters
+            // create learner with default parameters
             var learner = new RegressionRandomForestLearner();
             
             // learn model with found parameters
@@ -221,7 +214,7 @@ namespace SharpLearning.Examples.Guides
             var testError = metric.Error(testSet.Targets, testPredictions);
 
             // With default parameters the random forest learner
-            // already outperforms the optimized decision tree learner by alot.
+            // already outperforms the optimized decision tree learner.
             TraceTrainingAndTestError(trainError, testError);
         }
 
@@ -242,7 +235,7 @@ namespace SharpLearning.Examples.Guides
                 .ToF64Vector();
 
             // creates training test splitter, 
-            // since this is a regression problem we use a random training/test set splitter.
+            // Since this is a regression problem, we use the random training/test set splitter.
             // 30 % of the data is used for the test set. 
             var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
 
@@ -263,23 +256,22 @@ namespace SharpLearning.Examples.Guides
             // best parameter to tune on random forest is featuresPrSplit.
             var parameters = new double[][]
             {
-                new double[] { 100, 300 }, // trees (min: 30, max: 120)
-                new double[] { 1, numberOfFeatures }, // featuresPrSplit (min: 0.5, max: 0.9)
+                new double[] { 100, 300 }, // trees (min: 100, max: 300)
+                new double[] { 1, numberOfFeatures }, // featuresPrSplit (min: 1, max: numberOfFeatures)
                 new double[] { 8, 100 }, // maximumTreeDepth (min: 8, max: 100)
-                new double[] { 0.5, 0.9 }, // subSampleRatio (min: 0.5, max: 0.9)
             };
+
+            // Further split the training data to have a validation set to measure
+            // how well the model generalizes to unseen data during the optimization.
+            var validationSplit = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
+                .SplitSet(trainSet.Observations, trainSet.Targets);
 
             // Define optimizer objective (function to minimize)
             Func<double[], OptimizerResult> minimize = p =>
             {
                 // create the candidate learner using the current optimization parameters.
                 var candidateLearner = new RegressionRandomForestLearner(trees: (int)p[0], featuresPrSplit: (int)p[1], 
-                    maximumTreeDepth: (int)p[2], subSampleRatio: p[3],  runParallel: false);
-
-                // Further split the training data to have a validation set to measure
-                // how well the model generalizes to unseen data during the optimization.
-                var validationSplit = new StratifiedTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
-                    .SplitSet(trainSet.Observations, trainSet.Targets);
+                    maximumTreeDepth: (int)p[2],  runParallel: false);
 
                 var candidateModel = candidateLearner.Learn(validationSplit.TrainingSet.Observations,
                     validationSplit.TrainingSet.Targets);
@@ -303,7 +295,7 @@ namespace SharpLearning.Examples.Guides
 
             // create learner with found parameters
             var learner = new RegressionRandomForestLearner(trees: (int)best[0], featuresPrSplit: (int)best[1],
-                maximumTreeDepth: (int)best[2], subSampleRatio: best[3]);
+                maximumTreeDepth: (int)best[2]);
 
             // learn model with found parameters
             var model = learner.Learn(trainSet.Observations, trainSet.Targets);
@@ -316,7 +308,10 @@ namespace SharpLearning.Examples.Guides
             var trainError = metric.Error(trainSet.Targets, trainPredictions);
             var testError = metric.Error(testSet.Targets, testPredictions);
 
-            // Optimizer finds a much better set of hyperparameters.
+            // Optimizer found hyperparameters.
+            Trace.WriteLine(string.Format("Found parameters, Trees:  {0}, featuresPrSplit {1}:  maximumTreeDepth: {2}",
+                (int)best[0], (int)best[1], (int)best[2]));
+
             TraceTrainingAndTestError(trainError, testError);
         }
 
@@ -337,12 +332,9 @@ namespace SharpLearning.Examples.Guides
                 .ToF64Vector();
 
             // creates training test splitter, 
-            // For a regression problem one would usually apply a random training/test set splitter.
-            // However, since the quality target we are trying to predict does not contain floating point numbers
-            // we are going to split the dataset using a stratified training/test set splitter.
-            // this will make sure that we have an even distribution of the various quality grades in our training and test set.
+            // Since this is a regression problem, we use the random training/test set splitter.
             // 30 % of the data is used for the test set. 
-            var splitter = new StratifiedTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
+            var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
 
             var trainingTestSplit = splitter.SplitSet(observations, targets);
             var trainSet = trainingTestSplit.TrainingSet;
@@ -368,6 +360,12 @@ namespace SharpLearning.Examples.Guides
                 new double[] { 1, numberOfFeatures }, // featuresPrSplit (min: 1, max: numberOfFeatures)
             };
 
+            // Further split the training data to have a validation set to measure
+            // how well the model generalizes to unseen data during the optimization.
+            var validationSplit = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
+                .SplitSet(trainSet.Observations, trainSet.Targets);
+
+
             // Define optimizer objective (function to minimize)
             Func<double[], OptimizerResult> minimize = p =>
             {
@@ -375,11 +373,6 @@ namespace SharpLearning.Examples.Guides
                 var candidateLearner = new RegressionSquareLossGradientBoostLearner(iterations: (int)p[0],
                 learningRate: p[1], maximumTreeDepth: (int)p[2], subSampleRatio: p[3], featuresPrSplit: (int)p[4],
                 runParallel: false);
-
-                // Further split the training data to have a validation set to measure
-                // how well the model generalizes to unseen data during the optimization.
-                var validationSplit = new StratifiedTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
-                    .SplitSet(trainSet.Observations, trainSet.Targets);
 
                 var candidateModel = candidateLearner.Learn(validationSplit.TrainingSet.Observations,
                     validationSplit.TrainingSet.Targets);
