@@ -19,6 +19,53 @@ namespace SharpLearning.Examples.Guides
     public class HyperparameterTuningGuide
     {
         [TestMethod]
+        public void GradientBoost_Default_Parameters()
+        {
+            #region read and split data
+            // Use StreamReader(filepath) when running from filesystem
+            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
+            var targetName = "quality";
+
+            // read feature matrix
+            var observations = parser.EnumerateRows(c => c != targetName)
+                .ToF64Matrix();
+
+            // read regression targets
+            var targets = parser.EnumerateRows(targetName)
+                .ToF64Vector();
+
+            // creates training test splitter, 
+            // Since this is a regression problem, we use the random training/test set splitter.
+            // 30 % of the data is used for the test set. 
+            var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
+
+            var trainingTestSplit = splitter.SplitSet(observations, targets);
+            var trainSet = trainingTestSplit.TrainingSet;
+            var testSet = trainingTestSplit.TestSet;
+            #endregion
+
+            // create learner with default parameters
+            var learner = new RegressionSquareLossGradientBoostLearner(runParallel: false);
+
+            // learn model with found parameters
+            var model = learner.Learn(trainSet.Observations, trainSet.Targets);
+
+            // predict the training and test set.
+            var trainPredictions = model.Predict(trainSet.Observations);
+            var testPredictions = model.Predict(testSet.Observations);
+
+            // since this is a regression problem we are using square error as metric
+            // for evaluating how well the model performs.
+            var metric = new MeanSquaredErrorRegressionMetric();
+
+            // measure the error on training and test set.
+            var trainError = metric.Error(trainSet.Targets, trainPredictions);
+            var testError = metric.Error(testSet.Targets, testPredictions);
+
+            TraceTrainingAndTestError(trainError, testError);
+        }
+
+        [TestMethod]
         public void GradientBoost_Optimize_Hyperparameters()
         {
             #region read and split data
@@ -73,9 +120,13 @@ namespace SharpLearning.Examples.Guides
             Func<double[], OptimizerResult> minimize = p =>
             {
                 // create the candidate learner using the current optimization parameters.
-                var candidateLearner = new RegressionSquareLossGradientBoostLearner(iterations: (int)p[0],
-                learningRate: p[1], maximumTreeDepth: (int)p[2], subSampleRatio: p[3], featuresPrSplit: (int)p[4],
-                runParallel: false);
+                var candidateLearner = new RegressionSquareLossGradientBoostLearner(
+                        iterations: (int)p[0],
+                        learningRate: p[1], 
+                        maximumTreeDepth: (int)p[2], 
+                        subSampleRatio: p[3], 
+                        featuresPrSplit: (int)p[4],
+                        runParallel: false);
 
                 var candidateModel = candidateLearner.Learn(validationSplit.TrainingSet.Observations,
                     validationSplit.TrainingSet.Targets);
@@ -97,10 +148,14 @@ namespace SharpLearning.Examples.Guides
             var result = optimizer.OptimizeBest(minimize);
             var best = result.ParameterSet;
 
-            // create the candidate learner using the current optimization parameters.
-            var learner = new RegressionSquareLossGradientBoostLearner(iterations: (int)best[0],
-            learningRate: best[1], maximumTreeDepth: (int)best[2], subSampleRatio: best[3],
-            featuresPrSplit: (int)best[4], runParallel: false);
+            // create the final learner using the best hyperparameters.
+            var learner = new RegressionSquareLossGradientBoostLearner(
+                iterations: (int)best[0],
+                learningRate: best[1], 
+                maximumTreeDepth: (int)best[2], 
+                subSampleRatio: best[3],
+                featuresPrSplit: (int)best[4], 
+                runParallel: false);
 
             // learn model with found parameters
             var model = learner.Learn(trainSet.Observations, trainSet.Targets);
@@ -116,8 +171,13 @@ namespace SharpLearning.Examples.Guides
             // Optimizer found hyperparameters.
             Trace.WriteLine(string.Format("Found parameters, iterations:  {0}, learning rate {1:0.000}:  maximumTreeDepth: {2}, subSampleRatio {3:0.000}, featuresPrSplit: {4} ",
                 (int)best[0], best[1], (int)best[2], best[3], (int)best[4]));
+            TraceTrainingAndTestError(trainError, testError);
+        }
 
-            Trace.WriteLine(string.Format("Train error: {0:0.0000} - Test error: {1:0.0000}", trainError, testError));
+        static void TraceTrainingAndTestError(double trainError, double testError)
+        {
+            Trace.WriteLine(string.Format("Train error: {0:0.0000} - Test error: {1:0.0000}",
+                trainError, testError));
         }
     }
 }

@@ -1,20 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpLearning.Common.Interfaces;
 using SharpLearning.CrossValidation.TrainingTestSplitters;
-using SharpLearning.DecisionTrees.Learners;
 using SharpLearning.Examples.Properties;
-using SharpLearning.GradientBoost.Learners;
 using SharpLearning.InputOutput.Csv;
+using SharpLearning.InputOutput.Serialization;
 using SharpLearning.Metrics.Regression;
-using SharpLearning.Optimization;
 using SharpLearning.RandomForest.Learners;
 using SharpLearning.RandomForest.Models;
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using SharpLearning.InputOutput.Serialization;
-using SharpLearning.Common.Interfaces;
 
 namespace SharpLearning.Examples.Guides
 {
