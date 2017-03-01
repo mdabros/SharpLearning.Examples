@@ -112,6 +112,7 @@
     <Compile Include="CrossValidation\CrossValidationExamples.cs" />
     <Compile Include="CrossValidation\TrainTestSplitExamples.cs" />
     <Compile Include="FeatureTransformations\FeatureNormalizationExample.cs" />
+    <Compile Include="Guides\EnsembleLearningGuide.cs" />
     <Compile Include="Guides\HyperparameterTuningGuide.cs" />
     <Compile Include="Guides\IntroductionGuide.cs" />
     <Compile Include="InputOutput\CsvParserExamples.cs" />
