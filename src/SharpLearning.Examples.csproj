@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharpLearning.Examples</RootNamespace>
     <AssemblyName>SharpLearning.Examples</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -18,6 +18,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,57 +42,44 @@
       <HintPath>..\packages\MathNet.Numerics.3.17.0\lib\net40\MathNet.Numerics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpLearning.AdaBoost, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.AdaBoost.0.25.0.4\lib\net45\SharpLearning.AdaBoost.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.AdaBoost, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.AdaBoost.0.26.0\lib\netstandard2.0\SharpLearning.AdaBoost.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Common.Interfaces, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Common.Interfaces.0.25.0.4\lib\net45\SharpLearning.Common.Interfaces.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.Common.Interfaces, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Common.Interfaces.0.26.0\lib\netstandard2.0\SharpLearning.Common.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Containers, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Containers.0.25.0.4\lib\net45\SharpLearning.Containers.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.Containers, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Containers.0.26.0\lib\netstandard2.0\SharpLearning.Containers.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.CrossValidation, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.CrossValidation.0.25.0.4\lib\net45\SharpLearning.CrossValidation.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.CrossValidation, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.CrossValidation.0.26.0\lib\netstandard2.0\SharpLearning.CrossValidation.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.DecisionTrees, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.DecisionTrees.0.25.0.4\lib\net45\SharpLearning.DecisionTrees.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.DecisionTrees, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.DecisionTrees.0.26.0\lib\netstandard2.0\SharpLearning.DecisionTrees.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Ensemble, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Ensemble.0.25.0.4\lib\net45\SharpLearning.Ensemble.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.Ensemble, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Ensemble.0.26.0\lib\netstandard2.0\SharpLearning.Ensemble.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.FeatureTransformations, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.FeatureTransformations.0.25.0.4\lib\net45\SharpLearning.FeatureTransformations.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.FeatureTransformations, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.FeatureTransformations.0.26.0\lib\netstandard2.0\SharpLearning.FeatureTransformations.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.GradientBoost, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.GradientBoost.0.25.0.4\lib\net45\SharpLearning.GradientBoost.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.GradientBoost, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.GradientBoost.0.26.0\lib\netstandard2.0\SharpLearning.GradientBoost.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.InputOutput, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.InputOutput.0.25.0.4\lib\net45\SharpLearning.InputOutput.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.InputOutput, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.InputOutput.0.26.0\lib\netstandard2.0\SharpLearning.InputOutput.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Metrics, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Metrics.0.25.0.4\lib\net45\SharpLearning.Metrics.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.Metrics, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Metrics.0.26.0\lib\netstandard2.0\SharpLearning.Metrics.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Neural, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Neural.0.25.0.4\lib\net45\SharpLearning.Neural.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.Neural, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Neural.0.26.0\lib\netstandard2.0\SharpLearning.Neural.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Optimization, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Optimization.0.25.0.4\lib\net45\SharpLearning.Optimization.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.Optimization, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Optimization.0.26.0\lib\netstandard2.0\SharpLearning.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.RandomForest, Version=0.25.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.RandomForest.0.25.0.4\lib\net45\SharpLearning.RandomForest.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpLearning.RandomForest, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.RandomForest.0.26.0\lib\netstandard2.0\SharpLearning.RandomForest.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
