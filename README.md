@@ -1,6 +1,6 @@
 SharpLearning.Examples
 ======================
-[![Build status](https://ci.appveyor.com/api/projects/status/2i1vf6vbxdh3hx76?svg=true)](https://ci.appveyor.com/project/mdabros/sharplearning-examples)
+![Build status](https://machinelearning.visualstudio.com/_apis/public/build/definitions/1bfe43f8-2f3d-449c-bc6e-2491e646764d/14/badge)
 
 SharpLearning.Examples contains code examples to show how to use the machine learning library [SharpLearning](https://github.com/mdabros/SharpLearning)
 
