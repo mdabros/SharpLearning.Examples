@@ -15,7 +15,7 @@ namespace SharpLearning.Examples.Optimization
     public class HyperparameterTuningExamples
     {
         [TestMethod]
-        public void GridSearch_Parameter_Tuning()
+        public void Hyper_Parameter_Tuning()
         {
             #region Read data
 
@@ -50,7 +50,7 @@ namespace SharpLearning.Examples.Optimization
             // GridSearchOptimizer
             // GlobalizedBoundedNelderMeadOptimizer
             // ParticleSwarmOptimizer
-            // SequentialModelBasedOptimizer
+            // BayesianOptimizer
 
             // function to minimize
             Func<double[], OptimizerResult> minimize = p =>
