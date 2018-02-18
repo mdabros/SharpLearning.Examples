@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.Containers;
 using SharpLearning.CrossValidation.LearningCurves;
 using SharpLearning.DecisionTrees.Learners;
@@ -6,9 +9,6 @@ using SharpLearning.Examples.Properties;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Classification;
 using SharpLearning.Metrics.Regression;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 
 namespace SharpLearning.Examples.LearningCurves
 {

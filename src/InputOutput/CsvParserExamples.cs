@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.Examples.Properties;
 using SharpLearning.InputOutput.Csv;
-using System.IO;
 
 namespace SharpLearning.Examples.InputOutput
 {

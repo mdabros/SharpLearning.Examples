@@ -1,21 +1,17 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpLearning.Ensemble.Learners;
-using SharpLearning.Common.Interfaces;
-using SharpLearning.RandomForest.Learners;
-using SharpLearning.GradientBoost.Learners;
-using SharpLearning.InputOutput.Csv;
-using SharpLearning.CrossValidation.TrainingTestSplitters;
+﻿using System.Diagnostics;
 using System.IO;
-using SharpLearning.Examples.Properties;
-using SharpLearning.Metrics.Regression;
-using System.Diagnostics;
-using SharpLearning.Ensemble.Strategies;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpLearning.AdaBoost.Learners;
+using SharpLearning.Common.Interfaces;
 using SharpLearning.Containers.Extensions;
 using SharpLearning.Containers.Matrices;
-using SharpLearning.CrossValidation.CrossValidators;
-using SharpLearning.DecisionTrees.Learners;
-using SharpLearning.AdaBoost.Learners;
+using SharpLearning.CrossValidation.TrainingTestSplitters;
+using SharpLearning.Ensemble.Learners;
+using SharpLearning.Examples.Properties;
+using SharpLearning.GradientBoost.Learners;
+using SharpLearning.InputOutput.Csv;
+using SharpLearning.Metrics.Regression;
+using SharpLearning.RandomForest.Learners;
 
 namespace SharpLearning.Examples.Guides
 {

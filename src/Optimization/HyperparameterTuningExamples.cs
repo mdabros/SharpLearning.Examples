@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.CrossValidation.CrossValidators;
 using SharpLearning.DecisionTrees.Learners;
 using SharpLearning.Examples.Properties;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Regression;
 using SharpLearning.Optimization;
-using System;
-using System.Diagnostics;
-using System.IO;
 
 namespace SharpLearning.Examples.Optimization
 {
@@ -37,10 +37,10 @@ namespace SharpLearning.Examples.Optimization
             var metric = new MeanSquaredErrorRegressionMetric();
 
             // Parameter ranges for the optimizer 
-            var paramers = new double[][]
+            var paramers = new ParameterBounds[]
             {
-                new double[] { 1, 100 }, // maximumTreeDepth (min: 1, max: 100)
-                new double[] { 1, 16 }, // minimumSplitSize (min: 1, max: 16)
+                new ParameterBounds(min: 1, max: 100, transform: Transform.Linear), // maximumTreeDepth
+                new ParameterBounds(min: 1, max: 16, transform: Transform.Linear), // minimumSplitSize
             };
 
             // create random search optimizer

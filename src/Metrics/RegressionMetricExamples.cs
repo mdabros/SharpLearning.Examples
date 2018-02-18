@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.Metrics.Regression;
-using System.Diagnostics;
 
 namespace SharpLearning.Examples.Metrics
 {

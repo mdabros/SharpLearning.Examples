@@ -1,11 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.CrossValidation.TrainingTestSplitters;
 using SharpLearning.DecisionTrees.Learners;
 using SharpLearning.Examples.Properties;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Regression;
-using System.Diagnostics;
-using System.IO;
 
 namespace SharpLearning.Examples.CrossValidation
 {

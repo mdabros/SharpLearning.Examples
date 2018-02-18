@@ -1,17 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.CrossValidation.TrainingTestSplitters;
 using SharpLearning.Examples.Properties;
 using SharpLearning.GradientBoost.Learners;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Regression;
 using SharpLearning.Optimization;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpLearning.Examples.Guides
 {
@@ -101,13 +97,13 @@ namespace SharpLearning.Examples.Guides
 
             // Parameter ranges for the optimizer
             // best parameter to tune on random forest is featuresPrSplit.
-            var parameters = new double[][]
+            var parameters = new ParameterBounds[]
             {
-                new double[] { 80, 300 }, // iterations (min: 20, max: 100)
-                new double[] { 0.02, 0.2 }, // learning rate (min: 0.02, max: 0.2)
-                new double[] { 8, 15 }, // maximumTreeDepth (min: 8, max: 15)
-                new double[] { 0.5, 0.9 }, // subSampleRatio (min: 0.5, max: 0.9)
-                new double[] { 1, numberOfFeatures }, // featuresPrSplit (min: 1, max: numberOfFeatures)
+                new ParameterBounds(min: 80, max: 300, transform: Transform.Linear), // iterations
+                new ParameterBounds(min: 0.02, max:  0.2, transform: Transform.Logarithmic), // learning rate
+                new ParameterBounds(min: 8, max: 15, transform: Transform.Linear), // maximumTreeDepth
+                new ParameterBounds(min: 0.5, max: 0.9, transform: Transform.Logarithmic), // subSampleRatio
+                new ParameterBounds(min: 1, max: numberOfFeatures, transform: Transform.Linear), // featuresPrSplit
             };
 
             // Further split the training data to have a validation set to measure

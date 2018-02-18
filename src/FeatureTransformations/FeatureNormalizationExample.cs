@@ -1,12 +1,11 @@
-﻿using System;
+﻿using System.IO;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpLearning.InputOutput.Csv;
-using System.IO;
 using SharpLearning.Examples.Properties;
 using SharpLearning.FeatureTransformations.MatrixTransforms;
+using SharpLearning.InputOutput.Csv;
 using SharpLearning.Neural;
 using SharpLearning.Neural.Layers;
-using System.Linq;
 using SharpLearning.Neural.Learners;
 using SharpLearning.Neural.Loss;
 

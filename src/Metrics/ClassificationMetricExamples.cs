@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpLearning.Metrics.Classification;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpLearning.Metrics.Classification;
 
 namespace SharpLearning.Examples.Metrics
 {

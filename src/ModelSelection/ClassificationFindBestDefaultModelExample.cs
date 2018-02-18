@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.AdaBoost.Learners;
 using SharpLearning.Common.Interfaces;
 using SharpLearning.CrossValidation.TrainingTestSplitters;
@@ -9,9 +12,6 @@ using SharpLearning.GradientBoost.Learners;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Classification;
 using SharpLearning.RandomForest.Learners;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 
 namespace SharpLearning.Examples.ModelSelection
 {

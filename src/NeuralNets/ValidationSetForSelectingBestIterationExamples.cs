@@ -1,17 +1,17 @@
-﻿using SharpLearning.Examples.Properties;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpLearning.InputOutput.Csv;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.Containers.Matrices;
+using SharpLearning.CrossValidation.TrainingTestSplitters;
+using SharpLearning.Examples.Properties;
+using SharpLearning.InputOutput.Csv;
+using SharpLearning.Metrics.Classification;
 using SharpLearning.Neural;
-using SharpLearning.Neural.Layers;
 using SharpLearning.Neural.Activations;
+using SharpLearning.Neural.Layers;
 using SharpLearning.Neural.Learners;
 using SharpLearning.Neural.Loss;
-using SharpLearning.Metrics.Classification;
-using SharpLearning.CrossValidation.TrainingTestSplitters;
-using System.Diagnostics;
 
 namespace SharpLearning.Examples.NeuralNets
 {

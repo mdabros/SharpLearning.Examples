@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.Containers.Matrices;
 using SharpLearning.Examples.Properties;
 using SharpLearning.FeatureTransformations.MatrixTransforms;
@@ -9,8 +11,6 @@ using SharpLearning.Neural.Activations;
 using SharpLearning.Neural.Layers;
 using SharpLearning.Neural.Learners;
 using SharpLearning.Neural.Loss;
-using System.Diagnostics;
-using System.IO;
 
 namespace SharpLearning.Examples.NeuralNets
 {
