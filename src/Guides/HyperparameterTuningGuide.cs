@@ -102,7 +102,7 @@ namespace SharpLearning.Examples.Guides
                 new ParameterBounds(min: 80, max: 300, transform: Transform.Linear), // iterations
                 new ParameterBounds(min: 0.02, max:  0.2, transform: Transform.Logarithmic), // learning rate
                 new ParameterBounds(min: 8, max: 15, transform: Transform.Linear), // maximumTreeDepth
-                new ParameterBounds(min: 0.5, max: 0.9, transform: Transform.Logarithmic), // subSampleRatio
+                new ParameterBounds(min: 0.5, max: 0.9, transform: Transform.Linear), // subSampleRatio
                 new ParameterBounds(min: 1, max: numberOfFeatures, transform: Transform.Linear), // featuresPrSplit
             };
 
