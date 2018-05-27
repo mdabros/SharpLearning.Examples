@@ -39,8 +39,10 @@ namespace SharpLearning.Examples.Optimization
             // Parameter ranges for the optimizer 
             var paramers = new ParameterBounds[]
             {
-                new ParameterBounds(min: 1, max: 100, transform: Transform.Linear), // maximumTreeDepth
-                new ParameterBounds(min: 1, max: 16, transform: Transform.Linear), // minimumSplitSize
+                new ParameterBounds(min: 1, max: 100, 
+                    transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
+                new ParameterBounds(min: 1, max: 16, 
+                    transform: Transform.Linear, parameterType: ParameterType.Discrete), // minimumSplitSize
             };
 
             // create random search optimizer
@@ -59,7 +61,10 @@ namespace SharpLearning.Examples.Optimization
                 var optlearner = new RegressionDecisionTreeLearner(maximumTreeDepth: (int)p[0], minimumSplitSize: (int)p[1]);
                 var predictions = cv.CrossValidate(optlearner, observations, targets);
                 var error = metric.Error(targets, predictions);
-                Trace.WriteLine("Error: " + error);
+
+                Trace.WriteLine(string.Format("Candidate Error: {0:0.0000}, Candidate Parameters: {1}",
+                    error, string.Join(", ", p)));
+
                 return new OptimizerResult(p, error);
             };
 
