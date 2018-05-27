@@ -99,11 +99,20 @@ namespace SharpLearning.Examples.Guides
             // best parameter to tune on random forest is featuresPrSplit.
             var parameters = new ParameterBounds[]
             {
-                new ParameterBounds(min: 80, max: 300, transform: Transform.Linear), // iterations
-                new ParameterBounds(min: 0.02, max:  0.2, transform: Transform.Logarithmic), // learning rate
-                new ParameterBounds(min: 8, max: 15, transform: Transform.Linear), // maximumTreeDepth
-                new ParameterBounds(min: 0.5, max: 0.9, transform: Transform.Linear), // subSampleRatio
-                new ParameterBounds(min: 1, max: numberOfFeatures, transform: Transform.Linear), // featuresPrSplit
+                new ParameterBounds(min: 80, max: 300, 
+                    transform: Transform.Linear, parameterType: ParameterType.Discrete), // iterations
+
+                new ParameterBounds(min: 0.02, max:  0.2, 
+                    transform: Transform.Logarithmic, parameterType: ParameterType.Continuous), // learning rate
+
+                new ParameterBounds(min: 8, max: 15, 
+                    transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
+
+                new ParameterBounds(min: 0.5, max: 0.9, 
+                    transform: Transform.Linear, parameterType: ParameterType.Continuous), // subSampleRatio
+
+                new ParameterBounds(min: 1, max: numberOfFeatures, 
+                    transform: Transform.Linear, parameterType: ParameterType.Discrete), // featuresPrSplit
             };
 
             // Further split the training data to have a validation set to measure
