@@ -1,9 +1,12 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpLearning.Examples.Properties;
 using SharpLearning.FeatureTransformations.MatrixTransforms;
 using SharpLearning.InputOutput.Csv;
+using SharpLearning.InputOutput.Serialization;
 using SharpLearning.Neural;
 using SharpLearning.Neural.Layers;
 using SharpLearning.Neural.Learners;
@@ -35,16 +38,36 @@ namespace SharpLearning.Examples.FeatureTransformations
             var targets = parser.EnumerateRows(targetName)
                 .ToF64Vector();
 
-            // create learner
-            // neural net requires features to be normalize. 
-            // This makes convergens much faster.
+            // Create neural net.
             var net = new NeuralNet();
             net.Add(new InputLayer(observations.ColumnCount)); 
-            net.Add(new SoftMaxLayer(targets.Distinct().Count())); // no hidden layer and softmax output correpsonds to logistic regression
-            var learner = new ClassificationNeuralNetLearner(net, new LogLoss());
+            net.Add(new SquaredErrorRegressionLayer());
 
-            // learns a logistic regression classifier
+            // Create regression learner.
+            var learner = new RegressionNeuralNetLearner(net, new SquareLoss());
+
+            // learns a neural net regression model.
             var model = learner.Learn(observations, targets);
+
+            // serializer for saving the MinMaxTransformer
+            var serializer = new GenericXmlDataContractSerializer();
+
+            // Serialize transform for use with model.
+            // Replace this with StreamWriter for use with file system.
+            var data = new StringBuilder();
+            var writer = new StringWriter(data);
+            serializer.Serialize(minMaxTransformer, () => writer);
+
+            // Deserialize transform for use with model.
+            // Replace this with StreamReader for use with file system.
+            var reader = new StringReader(data.ToString());
+            var deserializedMinMaxTransform = serializer.Deserialize<MinMaxTransformer>(() => reader);
+
+            // Normalize observation and predict using the model.
+            var normalizedObservation = deserializedMinMaxTransform.Transform(observations.Row(0));
+            var prediction = model.Predict(normalizedObservation);
+
+            Trace.WriteLine($"Prediction: {prediction}");
         }
     }
 }
