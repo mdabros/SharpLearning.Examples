@@ -52,13 +52,13 @@ namespace SharpLearning.Examples.FeatureTransformations
             // serializer for saving the MinMaxTransformer
             var serializer = new GenericXmlDataContractSerializer();
 
-            // Serialize transform for use with model.
+            // Serialize transform for use with the model.
             // Replace this with StreamWriter for use with file system.
             var data = new StringBuilder();
             var writer = new StringWriter(data);
             serializer.Serialize(minMaxTransformer, () => writer);
 
-            // Deserialize transform for use with model.
+            // Deserialize transform for use with the model.
             // Replace this with StreamReader for use with file system.
             var reader = new StringReader(data.ToString());
             var deserializedMinMaxTransform = serializer.Deserialize<MinMaxTransformer>(() => reader);
