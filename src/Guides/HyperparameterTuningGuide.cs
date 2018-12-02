@@ -95,23 +95,23 @@ namespace SharpLearning.Examples.Guides
 
             var numberOfFeatures = trainSet.Observations.ColumnCount;
 
-            // Parameter ranges for the optimizer
+            // Parameter specs for the optimizer
             // best parameter to tune on random forest is featuresPrSplit.
-            var parameters = new ParameterBounds[]
+            var parameters = new IParameterSpec[]
             {
-                new ParameterBounds(min: 80, max: 300, 
+                new MinMaxParameterSpec(min: 80, max: 300, 
                     transform: Transform.Linear, parameterType: ParameterType.Discrete), // iterations
 
-                new ParameterBounds(min: 0.02, max:  0.2, 
+                new MinMaxParameterSpec(min: 0.02, max:  0.2, 
                     transform: Transform.Logarithmic, parameterType: ParameterType.Continuous), // learning rate
 
-                new ParameterBounds(min: 8, max: 15, 
+                new MinMaxParameterSpec(min: 8, max: 15, 
                     transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
 
-                new ParameterBounds(min: 0.5, max: 0.9, 
+                new MinMaxParameterSpec(min: 0.5, max: 0.9, 
                     transform: Transform.Linear, parameterType: ParameterType.Continuous), // subSampleRatio
 
-                new ParameterBounds(min: 1, max: numberOfFeatures, 
+                new MinMaxParameterSpec(min: 1, max: numberOfFeatures, 
                     transform: Transform.Linear, parameterType: ParameterType.Discrete), // featuresPrSplit
             };
 

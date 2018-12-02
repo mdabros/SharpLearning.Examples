@@ -37,11 +37,11 @@ namespace SharpLearning.Examples.Optimization
             var metric = new MeanSquaredErrorRegressionMetric();
 
             // Parameter ranges for the optimizer 
-            var paramers = new ParameterBounds[]
+            var paramers = new IParameterSpec[]
             {
-                new ParameterBounds(min: 1, max: 100, 
+                new MinMaxParameterSpec(min: 1, max: 100, 
                     transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
-                new ParameterBounds(min: 1, max: 16, 
+                new MinMaxParameterSpec(min: 1, max: 16, 
                     transform: Transform.Linear, parameterType: ParameterType.Discrete), // minimumSplitSize
             };
 
