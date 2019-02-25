@@ -30,7 +30,7 @@ public void RegressionLearner_Learn_And_Predict()
     // create learner
     var learner = new RegressionDecisionTreeLearner(maximumTreeDepth: 5);
 
-    // learns a RegressionRandomForestModel
+    // learns a RegressionDecisionTreeModel
     var model = learner.Learn(observations, targets);
 
     // use the model to predict the training data
@@ -62,7 +62,7 @@ public void RegressionLearner_Learn_And_Predict()
     // create learner (RandomForest)
     var learner = new RegressionRandomForestLearner(trees: 100);
 
-    // learns a RegressionDecisionTreeModel
+    // learns a RegressionRandomForestTreeModel
     var model = learner.Learn(observations, targets);
 
     // use the model to predict the training data
