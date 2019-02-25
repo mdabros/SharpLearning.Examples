@@ -103,7 +103,7 @@ namespace SharpLearning.Examples.Guides
                     transform: Transform.Linear, parameterType: ParameterType.Discrete), // iterations
 
                 new MinMaxParameterSpec(min: 0.02, max:  0.2, 
-                    transform: Transform.Logarithmic, parameterType: ParameterType.Continuous), // learning rate
+                    transform: Transform.Log10, parameterType: ParameterType.Continuous), // learning rate
 
                 new MinMaxParameterSpec(min: 8, max: 15, 
                     transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
