@@ -6,7 +6,8 @@ pr:
   - master
 
 variables:
-  buildPlatform: 'Any CPU'
+  buildPlatform: 'AnyCPU'
+  buildConfiguration: 'Release'
   testAssembliesSearchPattern: 'Build\**\SharpLearning.Examples.dll'
 
 jobs:
@@ -14,13 +15,6 @@ jobs:
   displayName: 'CI'
   pool:
     name: Hosted VS2017
-    
-  strategy:
-    matrix:
-      Debug:
-        buildConfiguration: 'Debug'
-      Release:
-        buildConfiguration: 'Release'
   
   steps:
   - task: NuGetCommand@2
