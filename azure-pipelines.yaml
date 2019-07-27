@@ -6,7 +6,7 @@ pr:
   - master
 
 variables:
-  buildPlatform: 'AnyCPU'
+  buildPlatform: # Use default.
   buildConfiguration: 'Release'
   testAssembliesSearchPattern: 'Build\**\SharpLearning.Examples.dll'
 
