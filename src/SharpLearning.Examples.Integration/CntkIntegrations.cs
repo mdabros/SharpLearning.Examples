@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Linq;
+using CNTK;
+using CntkCatalyst;
+using CntkCatalyst.LayerFunctions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpLearning.AdaBoost.Learners;
 using SharpLearning.CrossValidation.CrossValidators;
 using SharpLearning.CrossValidation.Samplers;
-using SharpLearning.InputOutput.Csv;
-using SharpLearning.Metrics.Classification;
+using SharpLearning.Examples.Integration;
+using SharpLearning.FeatureTransformations.MatrixTransforms;
 using SharpLearning.Metrics.Regression;
-using SharpLearning.Neural.Layers;
 using SharpLearning.Neural;
 using SharpLearning.Neural.Activations;
+using SharpLearning.Neural.Layers;
 using SharpLearning.Neural.Learners;
 using SharpLearning.Neural.Loss;
-using SharpLearning.FeatureTransformations.MatrixTransforms;
-using SharpLearning.Examples.Properties;
-using CntkCatalyst;
-using CNTK;
-using CntkCatalyst.LayerFunctions;
 using SharpLearning.Neural.Optimizers;
 
 namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
@@ -27,23 +23,18 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
     [TestClass]
     public class CntkIntegrations
     {
+        /// <summary>
+        /// Pure SharpLearning Example for comparison.
+        /// </summary>
         [TestMethod]
         public void SharpLearning_Example()
         {
-            // Use StreamReader(filepath) when running from filesystem
-            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
-            var targetName = "quality";
+            // Load data
+            var (observations, targets) = DataSetUtilities.LoadWinequalityWhite();
 
-            // read feature matrix
-            var observations = parser.EnumerateRows(c => c != targetName)
-                .ToF64Matrix();
             // transform data for neural net
             var transform = new MinMaxTransformer(0.0, 1.0);
             transform.Transform(observations, observations);
-
-            // read targets
-            var targets = parser.EnumerateRows(targetName)
-                .ToF64Vector();
 
             var featureCount = observations.ColumnCount;
 
@@ -67,24 +58,18 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
 
         /// <summary>
         /// Note that this uses the CntkCatalyst package, which adds layers, and model API to CNTK C#.
+        /// Ongoing effort to refactor/add SharpLearning utilities to make integration with CNTK, and other ML frameworks, easier.
+        /// This also serve to improve the CntkCatalyst extensions.
         /// </summary>
         [TestMethod]
         public void SharpLearning_With_Cntk_Example()
         {
-            // Use StreamReader(filepath) when running from filesystem
-            var parser = new CsvParser(() => new StringReader(Resources.winequality_white));
-            var targetName = "quality";
+            // Load data
+            var (observations, targets) = DataSetUtilities.LoadWinequalityWhite();
 
-            // read feature matrix
-            var observations = parser.EnumerateRows(c => c != targetName)
-                .ToF64Matrix();
             // transform data for neural net
             var transform = new MinMaxTransformer(0.0, 1.0);
             transform.Transform(observations, observations);
-
-            // read targets
-            var targets = parser.EnumerateRows(targetName)
-                .ToF64Vector();
 
             var featureCount = observations.ColumnCount;
             var observationCount = observations.RowCount;
@@ -139,7 +124,7 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
 
                 // Create model and fit.
                 var model = CreateModel(inputVariable, targetVariable, targetCount, dataType, device);
-                model.Fit(trainSource, batchSize: 8, epochs: 10, validationMinibatchSource: validationSource);
+                model.Fit(trainSource, batchSize: 8, epochs: 10);
 
                 // Predict.
                 var predictionsRaw = model.Predict(validationSource);
@@ -177,7 +162,6 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
             var metricFunc = Losses.MeanAbsoluteError(network.Output, targetVariable);
 
             // setup trainer.
-            //var learner = CntkCatalyst.Learners.MomentumSGD(network.Parameters(), 0.01, 0.1);
             var learner = CntkCatalyst.Learners.Adam(network.Parameters());
             var trainer = CNTKLib.CreateTrainer(network, lossFunc, metricFunc, new LearnerVector { learner });
 
