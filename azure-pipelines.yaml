@@ -44,9 +44,7 @@ jobs:
           !**\*TestFramework*.dll
           !**\obj\**
       vsTestVersion: toolsInstaller
-      runInParallel: true
+      runInParallel: false
       runTestsInIsolation: true
       codeCoverageEnabled: true
-      otherConsoleOptions: '/Platform:$(buildPlatform)' # E.g. to force running as x64
-      platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
