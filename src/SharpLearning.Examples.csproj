@@ -45,17 +45,17 @@
     <Reference Include="SharpLearning.AdaBoost, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpLearning.AdaBoost.0.31.0\lib\net461\SharpLearning.AdaBoost.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Common.Interfaces, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Common.Interfaces.0.31.0\lib\net461\SharpLearning.Common.Interfaces.dll</HintPath>
+    <Reference Include="SharpLearning.Common.Interfaces, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Common.Interfaces.0.31.1\lib\net461\SharpLearning.Common.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Containers, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Containers.0.31.0\lib\net461\SharpLearning.Containers.dll</HintPath>
+    <Reference Include="SharpLearning.Containers, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Containers.0.31.1\lib\net461\SharpLearning.Containers.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.CrossValidation, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.CrossValidation.0.31.0\lib\net461\SharpLearning.CrossValidation.dll</HintPath>
+    <Reference Include="SharpLearning.CrossValidation, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.CrossValidation.0.31.1\lib\net461\SharpLearning.CrossValidation.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.DecisionTrees, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.DecisionTrees.0.31.0\lib\net461\SharpLearning.DecisionTrees.dll</HintPath>
+    <Reference Include="SharpLearning.DecisionTrees, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.DecisionTrees.0.31.1\lib\net461\SharpLearning.DecisionTrees.dll</HintPath>
     </Reference>
     <Reference Include="SharpLearning.Ensemble, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpLearning.Ensemble.0.31.0\lib\net461\SharpLearning.Ensemble.dll</HintPath>
@@ -63,28 +63,31 @@
     <Reference Include="SharpLearning.FeatureTransformations, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpLearning.FeatureTransformations.0.31.0\lib\net461\SharpLearning.FeatureTransformations.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.GradientBoost, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.GradientBoost.0.31.0\lib\net461\SharpLearning.GradientBoost.dll</HintPath>
+    <Reference Include="SharpLearning.GradientBoost, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.GradientBoost.0.31.1\lib\net461\SharpLearning.GradientBoost.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.InputOutput, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.InputOutput.0.31.0\lib\net461\SharpLearning.InputOutput.dll</HintPath>
+    <Reference Include="SharpLearning.InputOutput, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.InputOutput.0.31.1\lib\net461\SharpLearning.InputOutput.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Metrics, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Metrics.0.31.0\lib\net461\SharpLearning.Metrics.dll</HintPath>
+    <Reference Include="SharpLearning.Metrics, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Metrics.0.31.1\lib\net461\SharpLearning.Metrics.dll</HintPath>
     </Reference>
     <Reference Include="SharpLearning.Neural, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpLearning.Neural.0.31.0\lib\net461\SharpLearning.Neural.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.Optimization, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.Optimization.0.31.0\lib\net461\SharpLearning.Optimization.dll</HintPath>
+    <Reference Include="SharpLearning.Optimization, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.Optimization.0.31.1\lib\net461\SharpLearning.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.RandomForest, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.RandomForest.0.31.0\lib\net461\SharpLearning.RandomForest.dll</HintPath>
+    <Reference Include="SharpLearning.RandomForest, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.RandomForest.0.31.1\lib\net461\SharpLearning.RandomForest.dll</HintPath>
     </Reference>
-    <Reference Include="SharpLearning.XGBoost, Version=0.31.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpLearning.XGBoost.0.31.0\lib\net461\SharpLearning.XGBoost.dll</HintPath>
+    <Reference Include="SharpLearning.XGBoost, Version=0.31.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLearning.XGBoost.0.31.1\lib\net461\SharpLearning.XGBoost.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="XGBoost, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\PicNet.XGBoost.0.2.1\lib\XGBoost.dll</HintPath>
     </Reference>
