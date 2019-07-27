@@ -1,6 +1,6 @@
 SharpLearning.Examples
 ======================
-![Build status](https://machinelearning.visualstudio.com/_apis/public/build/definitions/1bfe43f8-2f3d-449c-bc6e-2491e646764d/14/badge)
+[![Build Status](https://machinelearning.visualstudio.com/sharplearning-github-build/_apis/build/status/SharpLearning.Examples-CI?branchName=master)](https://machinelearning.visualstudio.com/sharplearning-github-build/_build/latest?definitionId=30&branchName=master)
 
 SharpLearning.Examples contains code examples to show how to use the machine learning library [SharpLearning](https://github.com/mdabros/SharpLearning)
 

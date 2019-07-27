@@ -1,0 +1,50 @@
+trigger:
+  - master
+
+# Pull request validation against master branch only.
+pr: 
+  - master
+
+variables:
+  buildPlatform: # Use default.
+  buildConfiguration: 'Release'
+  testAssembliesSearchPattern: 'Build\**\SharpLearning.Examples.dll'
+
+jobs:
+- job: 'CI'
+  displayName: 'CI'
+  pool:
+    name: Hosted VS2017
+  
+  steps:
+  - task: NuGetCommand@2
+    displayName: 'NuGet Restore'
+    inputs:
+      restoreSolution: '**\*.sln'
+      nugetConfigPath: nuget.config
+  
+  - task: VSBuild@1
+    displayName: 'Build solution **\*.sln'
+    inputs:
+      vsVersion: 15.0
+      platform: '$(buildPlatform)'
+      configuration: '$(buildConfiguration)'
+  
+  - task: VisualStudioTestPlatformInstaller@1
+    displayName: 'Visual Studio Test Platform Installer'
+  
+  - task: VSTest@2
+    displayName: 'Test Assemblies'
+    inputs:
+      testAssemblyVer2: |
+          $(testAssembliesSearchPattern)
+          !**\*TestAdapter*.dll
+          !**\*.Testing.dll
+          !**\*IntegrationTests*.dll
+          !**\*TestFramework*.dll
+          !**\obj\**
+      vsTestVersion: toolsInstaller
+      runInParallel: false
+      runTestsInIsolation: true
+      codeCoverageEnabled: true
+      configuration: '$(buildConfiguration)'
