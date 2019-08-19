@@ -6,6 +6,7 @@ using CNTK;
 using CntkCatalyst;
 using CntkCatalyst.LayerFunctions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpLearning.CrossValidation;
 using SharpLearning.CrossValidation.CrossValidators;
 using SharpLearning.CrossValidation.Samplers;
 using SharpLearning.Examples.Integration;
@@ -100,7 +101,8 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
 
             // Get cross validation folds.
             var sampler = new RandomIndexSampler<double>(seed: 24);
-            var crossValidationIndexSets = GetCrossValidationIndexSets(10, targets, sampler);
+            var crossValidationIndexSets = CrossValidationUtilities
+                .GetKFoldCrossValidationIndexSets(sampler, foldCount: 10, targets: targets);
             var predictions = new double[observationCount];
 
             // Run cross validation loop.
@@ -109,14 +111,14 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
                 // setup data.
                 var trainingNameToData = new Dictionary<string, MemoryMinibatchData>
                 {
-                    { "observations", observationsData.GetSamples(set.training) },
-                    { "targets", targetsData.GetSamples(set.training) }
+                    { "observations", observationsData.GetSamples(set.trainingIndices) },
+                    { "targets", targetsData.GetSamples(set.trainingIndices) }
                 };
 
                 var validationNameToData = new Dictionary<string, MemoryMinibatchData>
                 {
-                    { "observations", observationsData.GetSamples(set.validation) },
-                    { "targets", targetsData.GetSamples(set.validation) }
+                    { "observations", observationsData.GetSamples(set.validationIndices) },
+                    { "targets", targetsData.GetSamples(set.validationIndices) }
                 };
 
                 var trainSource = new MemoryMinibatchSource(nameToVariable, trainingNameToData, seed: 232, randomize: true);
@@ -124,14 +126,14 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
 
                 // Create model and fit.
                 var model = CreateModel(inputVariable, targetVariable, targetCount, dataType, device);
-                model.Fit(trainSource, batchSize: 8, epochs: 10);
+                model.Fit(trainSource, batchSize: 128, epochs: 10);
 
                 // Predict.
                 var predictionsRaw = model.Predict(validationSource);
                 var currentPredictions = predictionsRaw.Select(v => (double)v.Single()).ToArray();
 
                 // set cross-validation predictions
-                var validationIndices = set.validation;
+                var validationIndices = set.validationIndices;
                 for (int i = 0; i < validationIndices.Length; i++)
                 {
                     predictions[validationIndices[i]] = currentPredictions[i];
@@ -169,28 +171,6 @@ namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
 
             Trace.WriteLine(model.Summary());
             return model;
-        }
-
-        List<(int[] training, int[] validation)> GetCrossValidationIndexSets(int folds, double[] targets,
-            IIndexSampler<double> sampler)
-        {
-            var samplesPerFold = targets.Length / folds;
-            var allIndices = Enumerable.Range(0, targets.Length).ToArray();
-            var currentIndices = Enumerable.Range(0, targets.Length).ToArray();
-
-            var crossValidationIndexSets = new List<(int[] training, int[] validation)>();
-
-            for (int i = 0; i < folds; i++)
-            {
-                var holdoutSample = sampler.Sample(targets, samplesPerFold, currentIndices);
-                // Sample only from remaining indices.
-                currentIndices = currentIndices.Except(holdoutSample).ToArray();
-                // Training sample is all indices except the current hold out sample.
-                var trainingSample = allIndices.Except(holdoutSample).ToArray();
-                crossValidationIndexSets.Add((trainingSample, holdoutSample));
-            }
-
-            return crossValidationIndexSets;
         }
 
         string FormatErrorString(double[] targets, double[] predictions)
