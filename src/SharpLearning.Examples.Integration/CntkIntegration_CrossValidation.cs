@@ -21,7 +21,7 @@ using SharpLearning.Neural.Optimizers;
 namespace SharpLearning.Examples.IntegrationWithOtherMLPackages
 {
     [TestClass]
-    public class CntkIntegrations
+    public class CntkIntegration_CrossValidation
     {
         /// <summary>
         /// Pure SharpLearning Example for comparison.
